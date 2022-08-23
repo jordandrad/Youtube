@@ -1,6 +1,5 @@
 import 'dart:core';
 
-
 import 'package:flutter/material.dart';
 import 'package:youtube/CustomSearchDelegate.dart';
 import 'package:youtube/telas/biblioteca.dart';
@@ -16,18 +15,13 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+ late String _resultado = "";
   int _indexNow = 0;
 
-  void search()async {
-                    String? res = await showSearch(
-                        context: context, delegate: CustomSearchDelegate());
-                    
-                    print("Res = " + res.toString());
-                  }
-
-  List<Widget> telas = [inicio(), emalta(), inscricoes(), biblioteca()];
+  
   @override
   Widget build(BuildContext context) {
+     List<Widget> telas = [inicio(_resultado), emalta(), inscricoes(), biblioteca()];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -43,7 +37,14 @@ class _homeState extends State<home> {
             child: Row(children: [
               IconButton(
                   color: Color.fromARGB(255, 145, 142, 142),
-                  onPressed: search,
+                  onPressed: () => Future.delayed(Duration.zero, () async {
+                        String? res = await showSearch(
+                            context: context, delegate: CustomSearchDelegate());
+                        setState(() {
+                          _resultado = res.toString();
+                        });
+                        print("Resposta: " + _resultado);
+                      }),
                   icon: Icon(Icons.search)),
               /* IconButton(
                   color: Color.fromARGB(255, 145, 142, 142),

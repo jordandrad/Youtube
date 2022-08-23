@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:youtube/model/video.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -15,7 +14,7 @@ class Api {
         "search"
             "?part=snippet"
             "&type=video"
-            "&maxResults=50"
+            "&maxResults=200"
             "&order=date"
             "&key=$YOUTUBE_API_KEY"
             "&channelId=$CHANNEL_ID"
